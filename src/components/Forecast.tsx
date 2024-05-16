@@ -4,11 +4,13 @@ import moment from 'moment';
 import { ForecastData, WeatherItem } from '../types/weather';
 import Card from './Card';
 import ForecastItem from './ForecastItem';
+import Skeleton from './Skeleton';
 
 type Props = {
   data?: ForecastData;
+  isLoading: boolean;
 };
-const Forecast = ({ data }: Props) => {
+const Forecast = ({ data, isLoading }: Props) => {
   const groupByDay = (weatherData: WeatherItem[]) => {
     return weatherData.reduce((acc: Record<string, WeatherItem[]>, item: WeatherItem) => {
       const date = moment(item.dt_txt).format('YYYY-MM-DD');
@@ -32,10 +34,22 @@ const Forecast = ({ data }: Props) => {
     return dateFormat.format('d MMMM');
   };
 
-  return (
-    <div className="flex flex-col gap-4 items-start">
-      <h3 className="font-bold text-md">5-day Forecast (3 Hours)</h3>
-      <Card className="w-full">
+  const renderBody = () => {
+    if (isLoading) {
+      return (
+        <>
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+        </>
+      );
+    }
+    return (
+      <>
         {Object.keys(groupedData).map((date) => {
           return (
             <div key={date} className="flex items-start flex-col gap-4">
@@ -46,7 +60,14 @@ const Forecast = ({ data }: Props) => {
             </div>
           );
         })}
-      </Card>
+      </>
+    );
+  };
+
+  return (
+    <div className="flex flex-col gap-4 items-start">
+      <h3 className="font-bold text-md">5-day Forecast (3 Hours)</h3>
+      <Card className="w-full">{renderBody()}</Card>
     </div>
   );
 };

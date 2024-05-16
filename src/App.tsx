@@ -24,8 +24,8 @@ function App() {
       <div className="flex flex-col gap-6">
         <h1 className=" text-5xl font-bold">WEATHER APP</h1>
         <SearchInput handleSearch={handleSearch} />
-        <CurrentWeather data={currentWeather.data} />
-        <Forecast data={weatherForecast.data} />
+        <CurrentWeather data={currentWeather.data} isLoading={currentWeather.isFetching} />
+        <Forecast data={weatherForecast.data} isLoading={weatherForecast.isFetching} />
       </div>
     </>
   );
