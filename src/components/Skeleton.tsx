@@ -1,6 +1,6 @@
 const Skeleton = () => {
   return (
-    <div className="w-full min-w-[407px]">
+    <div className="w-full min-w-[400px]">
       <div className="animate-pulse flex space-x-4">
         <div className="flex-1 space-y-6 py-1">
           <div className="h-3 bg-slate-700 rounded"></div>
