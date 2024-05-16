@@ -1,13 +1,14 @@
 import { useMemo } from 'react';
 import moment from 'moment';
 
-import { useWeatherForecast } from '../hooks/useWeatherForecast';
+import { ForecastData, WeatherItem } from '../types/weather';
 import Card from './Card';
 import ForecastItem from './ForecastItem';
 
-const Forecast = () => {
-  const { data } = useWeatherForecast();
-
+type Props = {
+  data?: ForecastData;
+};
+const Forecast = ({ data }: Props) => {
   const groupByDay = (weatherData: WeatherItem[]) => {
     return weatherData.reduce((acc: Record<string, WeatherItem[]>, item: WeatherItem) => {
       const date = moment(item.dt_txt).format('YYYY-MM-DD');
@@ -37,10 +38,10 @@ const Forecast = () => {
       <Card className="w-full">
         {Object.keys(groupedData).map((date) => {
           return (
-            <div className="flex items-start flex-col gap-4">
+            <div key={date} className="flex items-start flex-col gap-4">
               <div className=" text-gray-500 font-medium">{renderDate(date)}</div>
               {groupedData[date].map((item) => (
-                <ForecastItem data={item} />
+                <ForecastItem key={item.dt} data={item} />
               ))}
             </div>
           );

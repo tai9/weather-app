@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 
 import axiosClient from '../configs/axiosClient';
+import { Coordinates, WeatherData } from '../types/weather';
 
-export const useCurrentWeather = () => {
+export const useCurrentWeather = (coord: Coordinates) => {
   const query = useQuery({
-    queryKey: ['current-weather'],
+    queryKey: ['current-weather', coord],
     queryFn: async () => {
-      const res = await axiosClient.get<WeatherData>(`/weather?lat=1.352083&lon=103.819839&units=metric`);
+      const res = await axiosClient.get<WeatherData>(`/weather?lat=${coord.lat}&lon=${coord.lon}&units=metric`);
       return res.data;
     },
   });

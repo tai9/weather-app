@@ -1,10 +1,13 @@
 import moment from 'moment';
 
-import { useCurrentWeather } from '../hooks/useCurrentWeather';
+import { WeatherData } from '../types/weather';
 import Card from './Card';
 
-const CurrentWeather = () => {
-  const { data } = useCurrentWeather();
+type Props = {
+  data?: WeatherData;
+};
+
+const CurrentWeather = ({ data }: Props) => {
   return (
     <Card>
       <div>{moment().format('MMMM d, YYYY')}</div>
