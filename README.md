@@ -34,6 +34,6 @@ export default {
 ## Environment Variables
 
 ```
-VITE_API_URL=https://api.openweathermap.org
-VITE_API_KEY=
+VITE_VERCEL_API_URL=https://api.openweathermap.org
+VITE_VERCEL_API_KEY=
 ```

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const API_URL = import.meta.env.VITE_API_URL;
+export const API_URL = import.meta.env.VITE_VERCEL_API_URL;
 
 const axiosClient = axios.create({
   baseURL: `${API_URL}/data/2.5`,
@@ -10,7 +10,7 @@ axiosClient.interceptors.request.use(
   (config) => {
     config.params = {
       ...config.params,
-      appid: import.meta.env.VITE_API_KEY,
+      appid: import.meta.env.VITE_VERCEL_API_KEY,
     };
     return config;
   },
