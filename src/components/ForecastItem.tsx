@@ -1,5 +1,7 @@
 import moment from 'moment';
 
+import { WeatherItem } from '../types/weather';
+
 type Props = {
   data: WeatherItem;
 };
